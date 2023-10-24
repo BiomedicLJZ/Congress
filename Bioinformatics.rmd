@@ -1,6 +1,9 @@
 ---
 title: "Introduction to Bioinformatics"
-output: html_document
+author: "Leonardo Juárez Zucco"
+output:
+pdf_document: default
+html_document: default
 ---
 ```{r setup, echo = FALSE, message = FALSE}
 library(DiagrammeR)
@@ -46,7 +49,7 @@ also learn how to interpret the results of bioinformatics analyses.
 
 To begin with, you should learn how to use the basic bioinformatics tools and techniques. These include:
 
-### Programming languages
+## Programming languages
 
 There are several languages useful to bioinformatics, including [R](https://www.r-project.org/about.html#:~:text=R%20is%20a%20language%20and,by%20John%20Chambers%20and%20colleagues.), [Python]
 (https://www.python.org/about/), Perl
@@ -63,7 +66,7 @@ Biologists]
 For the sake of this course, we will be using R in its version 4.2.3(This due to compatibility issues with later releases). You can download it from the [R Project website](https://www.r-project.org/).
 We also encourage you to use RStudio as your IDE (Integrated Development Environment). You can download it from the [RStudio website](https://rstudio.com/products/rstudio/download/).
 
-### Bioconductor
+## Bioconductor
 
 Bioconductor is a collection of R packages designed and developed by the bioinformatics community. Bioconductor provides a wide range of tools for analysing and visualising biological data. The
 Bioconductor repository contains more than 2000 packages for analysing genomic data, proteomic data, metabolomic data, and other types of biological data. Bioconductor is free to use and open source.
@@ -78,7 +81,7 @@ We use the `BiocManager::install()` function to install the Bioconductor package
 necessary packages from Bioconductor, also note that we use the version argument to specify the version of the package we want to install, this is because the latest version of the package is not
 compatible with the version of R we are using.
 
-### Databases
+## Databases
 
 Databases are used to store and organize biological data. There are many different types of databases, including sequence databases, structure databases, expression databases, and pathway databases.
 The biggest and most popular database is the [National Center for Biotechnology Information (NCBI)](https://www.ncbi.nlm.nih.gov/), which is a public database that contains a wide range of
