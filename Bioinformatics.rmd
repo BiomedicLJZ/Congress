@@ -1,13 +1,11 @@
 ---
 title: "Introduction to Bioinformatics"
-output:
-  pdf_document: default
-  html_document: default
+output: html_document
 ---
 ```{r setup, echo = FALSE, message = FALSE}
 library(DiagrammeR)
 library(reticulate)
-#Aquí por favor mete tu entorno de conda para trabajar código de python el mío es:
+# Aquí se añade tu ruta de python.exe
 path <- c("C:/Users/Lordleojz/mambaforge-pypy3/envs/bioinfo/python.exe")
 use_condaenv(path)
 ```
@@ -37,8 +35,6 @@ Bioinformatics is a valuable skill for anyone in the health and biology fields. 
 geneticists, biomedical engineers, medical doctors, pharmacists, veterinarians, chemists, and computer scientists. This is because bioinformatics is a multidisciplinary field that can benefit from
 the different
 knowledge and skills of people from different backgrounds.
-
-[//]:<> (Revise this to ensure well writing)
 
 ## How to Learn Bioinformatics
 
@@ -108,7 +104,7 @@ if (!requireNamespace("biomaRt", quietly = TRUE)) {
 ```
 Then we need to load the package.
 
-```{r setup, echo = FALSE, message = FALSE}
+```{r biomaRt, echo = FALSE, message = FALSE}
 library(biomaRt)
 ```
 
@@ -180,7 +176,7 @@ library(rentrez)
 
 To exemplify the use of this package we will retrieve the information of the gene *BRCA1* from the NCBI database.
 
-```{r retrieval}
+```{r retrieval, eval =  FALSE}
 # Specify the gene name
 gene_name <- "(Homo sapiens[Organism]) AND PRNP[Gene Name] "
 
@@ -202,3 +198,13 @@ gene_summary$summary
 ### SRA
 
 It's also possible to utilize R to obtain information from the SRA (Sequence Read Archive) which is a repository
+
+
+```{r test}
+#Convert datasets table to DataFrame
+DF <- as.data.frame(datasets)
+py$df <- r_to_py(DF)
+```
+```{python test2}
+print(df[10:25])
+```
