@@ -750,25 +750,10 @@ gene_summary$summary</code></pre>
 <pre class="r"><code>#Convert datasets table to DataFrame
 DF &lt;- as.data.frame(datasets)
 py$df &lt;- r_to_py(DF)</code></pre>
-<pre class="python"><code>print(df[10:25])</code></pre>
-<pre><code>##                          dataset  ...         version
-## 10   aplatyrhynchos_gene_ensembl  ...     ASM874695v1
-## 11    apolyacanthus_gene_ensembl  ...     ASM210954v1
-## 12  applatyrhynchos_gene_ensembl  ...     CAU_duck1.0
-## 13     atestudineus_gene_ensembl  ...      fAnaTes1.2
-## 14          bbbison_gene_ensembl  ...    Bison_UMD1.0
-## 15       bgrunniens_gene_ensembl  ...  LU_Bosgru_v3.0
-## 16         bihybrid_gene_ensembl  ...   UOA_Brahman_1
-## 17        bmusculus_gene_ensembl  ...     mBalMus1.v2
-## 18           bmutus_gene_ensembl  ...     BosGru_v2.0
-## 19       bsplendens_gene_ensembl  ...      fBetSpl5.2
-## 20          btaurus_gene_ensembl  ...      ARS-UCD1.2
-## 21      cabingdonii_gene_ensembl  ...     ASM359739v1
-## 22            catys_gene_ensembl  ...        Caty_1.0
-## 23         cauratus_gene_ensembl  ...     ASM336829v1
-## 24         cccarpio_gene_ensembl  ...  Cypcar_WagV4.0
-## 
-## [15 rows x 3 columns]</code></pre>
+<pre class="python"><code>matches = df[df[&#39;dataset&#39;].str.contains(&#39;sapiens&#39;)]
+print(matches)</code></pre>
+<pre><code>##                   dataset               description     version
+## 79  hsapiens_gene_ensembl  Human genes (GRCh38.p14)  GRCh38.p14</code></pre>
 </div>
 </div>
 <div class="footnotes footnotes-end-of-document">
