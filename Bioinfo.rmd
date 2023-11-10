@@ -1,0 +1,191 @@
+---
+title: "Introduction to Bioinformatics"
+author: "Leonardo Juárez Zucco"
+output:
+pdf_document: default
+html_document: default
+---
+```{r setup, echo = FALSE, message = FALSE}
+library(DiagrammeR)
+library(reticulate)
+# Aquí se añade tu ruta de python.exe
+path <- ("C:/Users/Lordleojz/mambaforge-pypy3/envs/bioinfo/python.exe")
+use_condaenv(path)
+```
+Introduction to Bioinformatics
+==============================
+
+Bioinformatics is a rapidly growing field that combines biology, medicine, computer science and mathematics to analyse and interpret biological data.
+
+Bioinformatics tools and techniques are used to study a wide range of biological phenomena, including the gene expression, protein structure and function and the evolution of species.
+
+## Why is it important?
+
+Bioinformatics is important because it allows us to study biology in a quantitative and systematic way, by using computers to analyse large datasets of biological data, we can identify patterns
+and relationships that would be difficult to impossible to see in the naked eye inside a wet-lab.
+
+## Who should Learn Bioinformatics
+
+Bioinformatics is a valuable skill for anyone in the health and biology fields. There are many profiles that can benefit from learning bioinformatics, including but not limited to: biologists,
+geneticists, biomedical engineers, medical doctors, pharmacists, veterinarians, chemists, and computer scientists. This is because bioinformatics is a multidisciplinary field that can benefit from
+the different
+knowledge and skills of people from different backgrounds.
+
+## How to Learn Bioinformatics
+
+There are many ways to learn bioinformatics; there are university courses, online courses, books, tutorials and workshops. If you are new to bioinformatics, I do recommend to star with learning
+the basis of biology and programming before diving into bioinformatics. You should learn how, when and why to use bioinformatics tools like BLAST, GEO and techniques like Meta-Analysis. You should
+also learn how to interpret the results of bioinformatics analyses.
+
+## Bioinformatics Tools and Techniques
+
+To begin with, you should learn how to use the basic bioinformatics tools and techniques. These include:
+
+## Programming languages
+
+There are several languages useful to bioinformatics, including [R](https://www.r-project.org/about.html#:~:text=R%20is%20a%20language%20and,by%20John%20Chambers%20and%20colleagues.), [Python]
+(https://www.python.org/about/), Perl
+(currently in decline), C++, [Julia](https://julialang.org/) (currently skyrocketing) and Java. R and Python are the most popular
+languages in
+the field this because they are easy to learn and have a large community of users. R is a statistical programming language used for data analysis and visualization. Python is a
+general-purpose programming language used for a wide range of applications, including web development, data science and machine learning. R and Python are both open source and free to use.
+
+For this course we will be using R, because it is the most popular language in the field If you are interested in learning Python or you already have some proficiency with the language, I recommend
+the [Python for
+Biologists]
+(https://pythonforbiologists.com/) book.
+
+For the sake of this course, we will be using R in its version 4.2.3(This due to compatibility issues with later releases). You can download it from the [R Project website](https://www.r-project.org/).
+We also encourage you to use RStudio as your IDE (Integrated Development Environment). You can download it from the [RStudio website](https://rstudio.com/products/rstudio/download/).
+
+## Bioconductor
+
+Bioconductor is a collection of R packages designed and developed by the bioinformatics community. Bioconductor provides a wide range of tools for analysing and visualising biological data. The
+Bioconductor repository contains more than 2000 packages for analysing genomic data, proteomic data, metabolomic data, and other types of biological data. Bioconductor is free to use and open source.
+
+To use all of Bioconductor's packages, you need to install the Bioconductor package. You can install the Bioconductor package by running the following code in R:
+
+```{r Install Bioconductor}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager",version = "3.16")
+```
+We use the `BiocManager::install()` function to install the Bioconductor package. The `BiocManager::install()` function is part of the BiocManager package, which is used to install and update the
+necessary packages from Bioconductor, also note that we use the version argument to specify the version of the package we want to install, this is because the latest version of the package is not
+compatible with the version of R we are using.
+
+## Databases
+
+Databases are used to store and organize biological data. There are many different types of databases, including sequence databases, structure databases, expression databases, and pathway databases.
+The biggest and most popular database is the [National Center for Biotechnology Information (NCBI)](https://www.ncbi.nlm.nih.gov/), which is a public database that contains a wide range of
+biological data, maintained by the National Institute of Health (NIH). The NCBI contains many different databases, including the [GenBank](https://www.ncbi.nlm.nih.gov/genbank/), which is a Genomic
+database that contains DNA sequences, the [Protein database](https://www.ncbi.nlm.nih.gov/protein/), which contains protein sequences, and the [Gene database](https://www.ncbi.nlm.nih.gov/gene/),
+which contains gene sequences. The NCBI also contains databases for other types of data, including the [Gene Expression Omnibus (GEO)](https://www.ncbi.nlm.nih.gov/geo/), which is a database of gene expression studies and datasets from several different organisms and the [PubMed](https://pubmed.ncbi.nlm.nih.gov/), which is a database of biomedical literature.
+
+### Data Retrieval Tools
+
+The NCBI provides several tools for retrieving data from its databases, including the [Entrez Programming Utilities (E-utilities)](https://www.ncbi.nlm.nih.gov/books/NBK25501/), which is a set of nine tools designed to provide access to the NCBI databases. The E-utilities can be accessed through the [Entrez Direct (EDirect)](https://www.ncbi.nlm.nih.gov/books/NBK179288/) command line interface a Python and R package or the web interface. The E-utilities can be used to search for data in the NCBI databases, download data from the NCBI databases, and upload data to the NCBI.
+
+Ensembl is another popular database that contains a wide range of biological data, including genomic data, gene expression data, and protein data. Ensembl provides several tools for retrieving data called [Ensembl REST APIs](https://rest.ensembl.org/). The Ensembl REST APIs can be accessed through the [Ensembl Perl API](https://www.ensembl.org/info/docs/api/index.html), those API's can
+be accessed and used without trouble using the bioconductor package [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html).
+
+#### Example of data retrieval using biomaRt
+
+First, we need to verify if the package is installed and install it if it's not.
+
+```{r Install biomaRt}
+if (!requireNamespace("biomaRt", quietly = TRUE)) {
+  BiocManager::install("biomaRt")
+}
+```
+Then we need to load the package.
+
+```{r biomaRt, echo = FALSE, message = FALSE}
+library(biomaRt)
+```
+
+**Once the package has been loaded, we can use all of its capabilities**
+
+```{r Marts}
+# List available databases
+listMarts()
+# Select the database
+mart <- useMart("ENSEMBL_MART_ENSEMBL")
+```
+
+We list all available Databases and select the Main `MART_ENSEMBL`
+
+```{r Datasets}
+#List available datasets
+datasets <- biomaRt::listDatasets(mart)
+head(datasets,25)
+mart <- useMart("ENSEMBL_MART_ENSEMBL", dataset = "hsapiens_gene_ensembl")
+```
+
+Here we select the *Homo sapiens* dataset
+
+```{r Attributes}
+#List available attributes
+attributes <- biomaRt::listAttributes(mart)
+head(attributes,25)
+#attributes
+```
+
+Then list **some** of the available attributes(The list is too long to add it whole here)[Feel free to uncomment the last line to list all available attributes]
+
+```{r Filters}
+#List available filters
+filters <- biomaRt::listFilters(mart)
+head(filters,25)
+#filters
+```
+
+Now we list all available filters we can apply to the information we retrieve, interpreting filters as the way we want to select the information important to us, for example, in the next following code we are using HGNC gene symbols to select only the genes we want to retrieve.
+
+```{r Query}
+#Query the database
+genes <- getBM(attributes = c("ensembl_gene_id", "hgnc_symbol", "chromosome_name", "start_position", "end_position", "strand"),
+			   filters = "hgnc_symbol",
+			   values = c("BRCA1", "BRCA2","HTT","APOE","PRNP"),
+			   mart = mart)
+genes
+```
+In this Function we are doing the following: We use the getBM function to `query`the  BioMart(hence the BM in the function's name) we select the attributes we want to see in the attributes parameter(for those who don't know everything inside the parenthesis in a function is called a parameter) we filter the information by gene symbol as noted before and list the genes we want to retrieve using the `c` function to concatenate all the gene symbols and last select the mart we are accessing
+
+With the previous code, we can see how easy it is to retrieve data from the Ensembl database using the biomaRt package. This is just a small example of what you can do with this package, you can
+retrieve a vast amount of data from the Ensembl database using this package, and you can also retrieve data from other databases like the Vega Genome database.
+
+### Entrez
+It's also possible to retrieve data from the NCBI with another package called [rentrez](https://cran.r-project.org/web/packages/rentrez/index.html), this package is very similar to biomaRt.
+
+```{r Rentrez}
+# Check if the package is installed and install it if it's not
+if (!requireNamespace("rentrez", quietly = TRUE)) {
+  install.packages("rentrez")
+}
+```
+
+```{r load_rentrez, echo = FALSE, message = FALSE}
+# Load the package
+library(rentrez)
+```
+
+To exemplify the use of this package, we will retrieve the information of the gene *BRCA1* from the NCBI database.
+
+```{r retrieval, eval =  FALSE}
+# Specify the gene name
+gene_name <- "(Homo sapiens[Organism]) AND PRNP[Gene Name] "
+
+# Use the esearch function to search the gene in the nucleotide database
+search_results <- entrez_search(db="gene", term=gene_name)
+
+# Use the esummary function to retrieve the gene summary
+gene_summary <- entrez_summary(db="gene", id=search_results$ids[1])
+
+print("Chromosome")
+gene_summary$chromosome
+print("Gene Nomenclature name")
+gene_summary$nomenclaturename
+print("Description")
+gene_summary$summary
+
+```
